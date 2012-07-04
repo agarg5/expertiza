@@ -1,6 +1,9 @@
 class Assignment < ActiveRecord::Base
   include DynamicReviewMapping
 
+  #Summer 2012 Project 2 Additions
+  belongs_to :assignment_group, :foreign_key => 'assignment_id'
+
   belongs_to :course
   belongs_to :wiki_type
   # wiki_type needs to be removed. When an assignment is created, it needs to
@@ -22,8 +25,13 @@ class Assignment < ActiveRecord::Base
   # TODO A bug in Rails http://dev.rubyonrails.org/ticket/4996 prevents us from using this:
   # has_many :responses, :through => :response_maps, :source => 'response'
 
+
+
   validates_presence_of :name
   validates_uniqueness_of :scope => [:directory_path, :instructor_id]
+
+  #Summer 2012 Project 2 Additions
+  validates_presence_of :xp
 
   COMPLETE = "Complete"
 
