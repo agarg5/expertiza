@@ -23,7 +23,6 @@ class CreateAssignments < ActiveRecord::Migration
     t.column "require_signup", :boolean
     t.column "num_reviewers", :integer, :limit => 10, :default => 0, :null => false
     t.column "spec_location", :text
-    t.column "xp", :integer
   end
 
   add_index "assignments", ["review_questionnaire_id"], :name => "fk_assignments_review_questionnaires"
@@ -43,8 +42,7 @@ class CreateAssignments < ActiveRecord::Migration
   execute "alter table assignments 
              add constraint fk_assignments_wiki_types
              foreign key (wiki_type_id) references wiki_types(id)"
-             
-    
+
   end
 
   def self.down
