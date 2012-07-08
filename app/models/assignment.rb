@@ -2,7 +2,7 @@ class Assignment < ActiveRecord::Base
   include DynamicReviewMapping
 
   #Summer 2012 Project 2 Additions
-  belongs_to :assignment_group, :foreign_key => 'assignment_group_id'
+  belongs_to :assignment_group
 
   belongs_to :course
   belongs_to :wiki_type
@@ -29,10 +29,6 @@ class Assignment < ActiveRecord::Base
 
   validates_presence_of :name
   validates_uniqueness_of :scope => [:directory_path, :instructor_id]
-
-  #Summer 2012 Project 2 Additions
-  validates_presence_of :xp
-  validates_presence_of :assignment_group_id
 
   COMPLETE = "Complete"
 
