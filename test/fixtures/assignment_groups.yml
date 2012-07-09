@@ -1,9 +1,7 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  name: MyString
-  xp: 1
-
-two:
-  name: MyString
-  xp: 1
+<% 1.upto(5) do |i| %>
+assignment_group_<%= i %>:
+  name: <%= "AssignmentGroup#{i}" %>
+  xp: <%= i * 1000 %>
+<% end %>

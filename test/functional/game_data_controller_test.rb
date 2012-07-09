@@ -1,7 +1,10 @@
-require 'test_helper'
+require File.dirname(__FILE__) + '/../test_helper'
+require 'yaml'
+require 'assignment_group'
+
 
 class GameDataControllerTest < ActionController::TestCase
-  # Replace this with your real tests.
+  fixtures :assignment_groups, :assignments
   test "the truth" do
     assert true
   end

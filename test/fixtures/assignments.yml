@@ -151,3 +151,30 @@ assignment_project3:
   team_assignment: <%= 0 %>
   team_count: 1
   wiki_type_id: <=% Fixtures.identify(:MediaWiki) %>
+
+<% 1.upto(12) do |i| %>
+assignment<%= i %>:
+  name: Assignment <%= i %>
+  directory_path: assignment<%= i %>_dir
+  submitter_count: <%= i %>
+  course: course<%= i %>
+  instructor_id: <%= prof_list[i%3] %>
+  private: <%= i%2 %>
+  num_reviews: <%= i%2+1 %>
+  num_review_of_reviews: <%= i%2+1 %>
+  num_review_of_reviewers: <%= i%3 %>
+  review_questionnaire_id: <%= q_list[i%3] %>
+  review_of_review_questionnaire_id: <%= Fixtures.identify(:peer_review_questionnaire) %>
+  author_feedback_questionnaire_id: <%= q_list[(i+1)%3] %>
+  teammate_review_questionnaire_id: <%= q_list[(i+2)%3] %>
+  reviews_visible_to_all: <%= i%2 %>
+  require_signup: <%= i==5 %>
+  num_reviewers: <%= i%5+1 %>
+  spec_location:
+  team_assignment: <%= i > 7 %>
+  wiki_type_id: 1
+  team_count: <%= 2*i %>
+  assignment_group_id: <%= i%5 %>
+  xp: <%= i*1000 %>
+  
+<% end %>
