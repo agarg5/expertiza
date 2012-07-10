@@ -1,4 +1,5 @@
 class GameDataController < ApplicationController
+  # GET /game_data
   def index
     @game_data = GameDataHelper::get_game_data(session[:user].id)
 

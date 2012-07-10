@@ -1,14 +1,19 @@
+# provides assignment game data to controller to serve as json to the game world front end
 module GameDataHelper
   @@NAMED_ORDER = {1 => "first", 2 => "second", 3 => "third", 4 => "fourth", 5 => "fifth", 6 => "sixth", 7 => "seventh",
-    8 => "eighth", 9 => "ninth", 10 => "tenth"}
+    8 => "eighth", 9 => "ninth", 10 => "tenth", 11 => "eleventh", 12 => "twelfth", 13 => "thirteenth", 14 => "fourteenth", 15 => "fifteenth",
+    16 => "sixteenth", 17 => "seventeenth", 18 => "eighteenth", 19 => "nineteenth", 20 => "twentieth"}
 
   protected
-
+  
+  # called by game data controller to begin the process
   def self.get_game_data(user_id)
     world = get_world(user_id)
     return world
   end
 
+  # creates all gata pertaining to the world - the rooms which contain groups of assignments,
+  #   and the center which is the means of traversal between rooms
   def self.get_world(user_id)
     world = Hash.new
     world['rooms'] = Array.new
@@ -36,6 +41,7 @@ module GameDataHelper
     return world
   end
 
+  # gates allow traversal to adjacent gate or back to the center
   def self.get_gate(isCenterGate, group, next_index, next_group_id)
     gate = Hash.new
     if (isCenterGate)
@@ -64,6 +70,7 @@ module GameDataHelper
     return gate
   end
 
+  # hubs contain the gates for a specific room
   def self.get_hub(group, next_index, next_group_id)
     hub = Hash.new
     hub['openPower'] = group.xp
@@ -78,12 +85,14 @@ module GameDataHelper
     return hub
   end
 
+  # gates contain info for traversal to the adjacent room
   def self.get_gates(next_index)
     gates = Array.new
     gates.push("gate#{next_index}")
     gates.push("centerGate#{next_index}")
   end
 
+  # buildings contain info related to a specific assignment
   def self.get_buildings(assignments, hub, user_id)
     buildings = Array.new
     assignments.each do |assignment|
@@ -102,6 +111,7 @@ module GameDataHelper
     return buildings
   end
 
+  # the scoring mechanism for participants, based on grade and/or submissions
   def self.get_participant_progress(assignment_id, user_id)
     participant_progress = Hash.new
     assignment_participant = AssignmentParticipant.find(:all, {:conditions => ['user_id=? AND parent_id=?',
