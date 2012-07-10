@@ -105,7 +105,7 @@ module GameDataHelper
   def self.get_participant_progress(assignment_id, user_id)
     participant_progress = Hash.new
     assignment_participant = AssignmentParticipant.find(:all, {:conditions => ['user_id=? AND parent_id=?',
-        user_id, assignment_id]}, :limit => 1)[0]
+        user_id, assignment_id]})[0]
     participant_progress['progress'] = 0
 
     if (assignment_participant.nil?)
