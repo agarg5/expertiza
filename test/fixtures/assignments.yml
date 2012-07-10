@@ -152,7 +152,7 @@ assignment_project3:
   team_count: 1
   wiki_type_id: <=% Fixtures.identify(:MediaWiki) %>
 
-<% 1.upto(12) do |i| %>
+<% 12.upto(20) do |i| %>
 assignment<%= i %>:
   name: Assignment <%= i %>
   directory_path: assignment<%= i %>_dir
@@ -174,7 +174,7 @@ assignment<%= i %>:
   team_assignment: <%= i > 7 %>
   wiki_type_id: 1
   team_count: <%= 2*i %>
-  assignment_group_id: <%= i%5 %>
+  assignment_group_id: <%= Fixtures.identify(:assignment_group_1) %>
   xp: <%= i*1000 %>
   
 <% end %>
