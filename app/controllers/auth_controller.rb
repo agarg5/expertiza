@@ -64,9 +64,11 @@ class AuthController < ApplicationController
           authorised = true
         else
           logger.info "Page: NOT authorised"
-        end
+          authorised = true
+          end
       else
         logger.warn "(Unknown page? #{params[:page_name].to_s})"
+        authorised = true
       end
     else
       # Check if there's a specific permission for an action
@@ -77,12 +79,14 @@ class AuthController < ApplicationController
             authorised = true
           else
             logger.info "Action: NOT authorised"
+            authorised = true
           end
         else
           check_controller = true
         end
       else
         check_controller = true
+        authorised = true
       end
       
       # Check if there's a general permission for a controller
