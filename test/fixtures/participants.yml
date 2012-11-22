@@ -150,8 +150,9 @@ par15:
   submit_allowed: 1
   review_allowed: 1
   user_id: <%= Fixtures.identify(:student3) %>
-  parent_id: <%= Fixtures.identify(:assignment7) %>
+  parent_id: <%= Fixtures.identify(:assignment18) %>
   topic: Research Communication
+  grade: 92
   penalty_accumulated: 0
   type : AssignmentParticipant
   handle: "par15"
