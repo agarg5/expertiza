@@ -68,7 +68,7 @@
       <div class="content">
         <div class="breadcrumbs">
 <!--%= render_component(:controller => 'page/breadcrumbs', :action =>
-'breadcrumbs') %-->
+'breadcrumbs') %-->      <%=  link_to "link", :controller => :games, :action => :index %>
           <%= render :partial => 'menu_items/breadcrumbs', 
 	      :locals => {:crumbs => session[:menu].crumbs} %>
         </div>
