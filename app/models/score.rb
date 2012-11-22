@@ -97,10 +97,8 @@ class Score < ActiveRecord::Base
         if @q_types[x].q_type == "Rating"
           ratingPart = @q_types[x].parameters.split("::").last
           if ratingPart.split("|")[0] == "1"
-            if(!item.nil?)
-              weighted_score += item.comments.to_i * question.weight
-              sum_of_weights += question.weight
-            end
+            weighted_score += item.comments.to_i * question.weight
+            sum_of_weights += question.weight
           end
         end
         x = x + 1
@@ -123,10 +121,7 @@ class Score < ActiveRecord::Base
       @invalid = 1
     end
     end
-    if(sum_of_weights > 0)
-      return (weighted_score.to_f / (sum_of_weights.to_f * @questionnaire.max_question_score.to_f)) * 100
-    else
-      return -1 #indicating no score
-    end
+    return (weighted_score.to_f / (sum_of_weights.to_f * @questionnaire.max_question_score.to_f)) * 100
+
   end
 end

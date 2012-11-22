@@ -42,8 +42,7 @@ class CreateAssignments < ActiveRecord::Migration
   execute "alter table assignments 
              add constraint fk_assignments_wiki_types
              foreign key (wiki_type_id) references wiki_types(id)"
-             
-    
+
   end
 
   def self.down
