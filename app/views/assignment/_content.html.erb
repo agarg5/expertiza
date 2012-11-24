@@ -1,4 +1,4 @@
-<script type="text/javascript">
+    <script type="text/javascript">
 function onChange(){
 	count = document.getElementById("team_count1");
 	hidden = document.getElementById("team_count2");
@@ -59,6 +59,14 @@ function onChangeWikiType(){
 <tr>
   <td><label for="assignment_name">Assignment name: </label></td>
   <td><%= text_field 'assignment', 'name'  %></td>
+</tr>
+<tr>
+    <td><label for="assignment_group">Assignment Group:</label>   </td>
+    <td><%= select("assignment", "assignment_group_id", AssignmentGroup.find(:all).collect{ |c| [ c.name, c.id] }) %>   </td>
+</tr>
+<tr>
+    <td><label for="xp">Assignment XP: </label></td>
+    <td><%= text_field 'assignment', 'xp' %></td>
 </tr>
 <tr>
   <td><label for="assignment_directory" id="assgt_directory">Submission directory: </label></td>
