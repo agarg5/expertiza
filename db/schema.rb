@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120707173433) do
+ActiveRecord::Schema.define(:version => 20121122005120) do
 
   create_table "assignment_groups", :force => true do |t|
     t.string   "name"
@@ -144,6 +144,12 @@ ActiveRecord::Schema.define(:version => 20120707173433) do
   add_index "due_dates", ["review_allowed_id"], :name => "fk_due_date_review_allowed"
   add_index "due_dates", ["review_of_review_allowed_id"], :name => "fk_due_date_review_of_review_allowed"
   add_index "due_dates", ["submission_allowed_id"], :name => "fk_due_date_submission_allowed"
+
+  create_table "games", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "institutions", :force => true do |t|
     t.string "name", :default => "", :null => false
