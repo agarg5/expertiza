@@ -48,12 +48,16 @@ module GameDataHelper
     if (isCenterGate)
       targetName = 'targetName'
       name = 'name'
+      gate[name] = "centerGate#{group.id}"
+      gate[targetName] = "hub#{group.id}"
     else
       targetName = 'name'
       name = 'targetName'
+      gate[name] = "center"
+      gate[targetName] = "Gate#{group.id}"
     end
-    gate[targetName] = "hub#{group.id}"
-    gate[name] = "centerGate#{group.id}"
+   # gate[targetName] = "hub#{group.id}"
+   # gate[name] = "centerGate#{group.id}"
     if (!isCenterGate)
       gate['title'] = "To Center"
     else
