@@ -31,7 +31,7 @@ MyGame = ig.Game.extend({
 	
 	player: null, //Reference to the player, can be useful.
 	
-	levelDefinition: null, //The definition of the level, in json. Should be taken from the server somehow.
+	levelDefinition: {}, //The definition of the level, in json. Should be taken from the server somehow.
 	
 	map: [], //The collision and drawing map of the level, built at run time.
 	
@@ -46,7 +46,7 @@ MyGame = ig.Game.extend({
 		//If assignments are in progress or finished, assign "assignmentProgress" to 1 for in progress and 2 for finished.
 		//Set "earnedXP" to the amount of XP earned by the player and "xp" to the total XP possible. XP will also be the power of the assignment, used for opening gates.
 		//"title" may be set to provide a title above the assignment, gate, center, or hub.
-		levelDefinition = {"rooms": [
+		/*levelDefinition = {"rooms": [
 
 //room 1
 {"buildings": [
@@ -70,7 +70,7 @@ MyGame = ig.Game.extend({
 "center": {"title":"Center","gates": [
 	{"targetName":"h1","name":"cG1","title":"To the first room","isOpen":true},
 	{"targetName":"h2","name":"cG2","title":"To the last room","isOpen":false}
-]}};
+]}}; /*
 		
 		/*{"rooms": [
 			{"buildings": [
@@ -156,8 +156,19 @@ MyGame = ig.Game.extend({
 		ig.input.bind( ig.KEY.RIGHT_ARROW, 'right' );
 		
 		ig.input.bind( ig.KEY.SPACE, 'space' );
-		
-		//GET LEVEL FROM SERVER AND LOAD INTO LEVELDEFINITION HERE.
+
+
+        //GET LEVEL FROM SERVER AND LOAD INTO LEVELDEFINITION HERE.
+        var http_request = new XMLHttpRequest();
+        http_request.open("GET", "http://127.0.0.1:3000/game_data" , true);
+        http_request.onreadystatechange = function () {
+            var done = 4, ok = 200;
+            if (http_request.readyState == done && http_request.status == ok) {
+                levelDefinition = JSON.parse(http_request.responseText);
+            }
+        };
+        http_request.send(null);
+
 		this.levelSetup();
 	},
 		
@@ -177,7 +188,7 @@ MyGame = ig.Game.extend({
 		var offsetX;
 		var offsetY;
 		
-		this.spawnEntity(EntityPlayer, 100, 150, levelDefinition.player);
+		this.spawnEntity(EntityPlayer, 100, 150, this.levelDefinition.player);
 		this.spawnEntity(EntityPointer, 0, 0);
 		
 		//SPAWN ROOMS:

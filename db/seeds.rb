@@ -335,3 +335,6 @@ DeadlineRight.create(:name => 'No')
 DeadlineRight.create(:name => 'Late')
 DeadlineRight.create(:name => 'OK')
 
+1.upto(3) do |i|
+  AssignmentGroup.create(:name => "AssignmentGroup#{i}", :xp => i*100)
+ end
