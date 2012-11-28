@@ -30,12 +30,13 @@ module GameDataHelper
       next_group_id = next_group.id
       end
       hub = get_hub(group, next_index, next_group_id)
-      world['center']['gates'].push(get_gate(true, group, next_index, next_group_id))
-      world['rooms'].push('buildings' => get_buildings(group.assignments, "hub#{group.id}", user_id))
-      world['rooms'].push('hub' => hub)
       gates = Array.new
       gates.push(get_gate(false, group, next_index, next_group_id))
-      world['rooms'].push('gates' => gates)
+      world['center']['gates'].push(get_gate(true, group, next_index, next_group_id))
+      world['rooms'].push('buildings' => get_buildings(group.assignments, "hub#{group.id}", user_id),'hub' => hub, 'gates' => gates )
+      # Rooms have building, hub and gates that's why all three grouped under 1 room
+      #world['rooms'].push('hub' => hub)
+      #world['rooms'].push('gates' => gates)
     end
 
     return world
@@ -103,6 +104,7 @@ module GameDataHelper
       building['title'] = assignment.name
       building['redirect'] = assignment.directory_path
 
+
       participant_progress = get_participant_progress(assignment.id, user_id)
       building['assignmentProgress'] = participant_progress['progress']
       building['earnedXP'] = participant_progress['grade']
@@ -114,6 +116,7 @@ module GameDataHelper
   # the scoring mechanism for participants, based on grade and/or submissions
   def self.get_participant_progress(assignment_id, user_id)
     participant_progress = Hash.new
+    # Get participant details based on used id and assignment id.
     assignment_participant = AssignmentParticipant.find(:all, {:conditions => ['user_id=? AND parent_id=?',
         user_id, assignment_id]})[0]
     participant_progress['progress'] = 0

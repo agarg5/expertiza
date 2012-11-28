@@ -176,8 +176,10 @@ class AssignmentParticipant < Participant
   
   def get_wiki_submissions
     currenttime = Time.now.month.to_s + "/" + Time.now.day.to_s + "/" + Time.now.year.to_s
- 
-    if self.assignment.team_assignment and self.assignment.wiki_type.name == "MediaWiki"
+    #
+    if (!self.assignment.wiki_type.nil?)
+      if self.assignment.team_assignment and
+        self.assignment.wiki_type.name == "MediaWiki"
        submissions = Array.new
        if self.team
         self.team.get_participants.each {
@@ -189,10 +191,11 @@ class AssignmentParticipant < Participant
         }
        end
        return submissions
-    elsif self.assignment.wiki_type.name == "MediaWiki"
-       return WikiType.review_mediawiki(self.assignment.directory_path, currenttime, self.handle)       
-    elsif self.assignment.wiki_type.name == "DocuWiki"
-       return WikiType.review_docuwiki(self.assignment.directory_path, currenttime, self.handle)             
+      elsif self.assignment.wiki_type.name == "MediaWiki"
+         return WikiType.review_mediawiki(self.assignment.directory_path, currenttime, self.handle)
+      elsif self.assignment.wiki_type.name == "DocuWiki"
+         return WikiType.review_docuwiki(self.assignment.directory_path, currenttime, self.handle)
+      end
     else
        return Array.new
     end
